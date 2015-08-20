@@ -223,6 +223,27 @@ public class Relationship extends Subject implements HasFacts, HasFields {
   }
 
   /**
+   * The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#OTHER} if not known.
+   *
+   * @return The enum referencing the known type of the relationship, or {@link org.gedcomx.types.RelationshipType#OTHER} if not known.
+   */
+  @XmlTransient
+  @JsonIgnore
+  public <Q extends Enum<Q>> Q getKnownCustomType(Class<Q> customType) {
+    return getType() == null ? null : org.codehaus.enunciate.XmlQNameEnumUtil.fromURIValue(getType().toString(), customType);
+  }
+
+  /**
+   * Set the relationship type from a known enumeration of relationship types.
+   *
+   * @param type The relationship type.
+   */
+  @JsonIgnore
+  public <Q extends Enum<Q>> void setKnownCustomType(Q type) {
+    setType(type == null ? null : URI.create(org.codehaus.enunciate.XmlQNameEnumUtil.toURIValue(type)));
+  }
+
+  /**
    * A reference to a person in the relationship. The name "person1" is used only to distinguish it from
    * the other person in this relationship and implies neither order nor role. When the relationship type
    * implies direction, it goes from "person1" to "person2".
