@@ -36,8 +36,8 @@ impl Uri {
     //   this(value == null ? null : value.toString());
     // }
 
-    pub fn new<S: Into<String>>(value: S) -> Self {
-        Self::create(value.into())
+    pub fn new(value: String) -> Self {
+        Self { value }
     }
     // pub fn URI(String value) {
     //   if (value == null) {
@@ -47,8 +47,8 @@ impl Uri {
     //   this.value = value;
     // }
 
-    pub fn create(uri: String) -> Self {
-        Self { value: uri }
+    pub fn create<S: Into<String>>(uri: S) -> Self {
+        Self::new(uri.into())
     }
 
     // pub fn static URI create(java.net.URI uri) {

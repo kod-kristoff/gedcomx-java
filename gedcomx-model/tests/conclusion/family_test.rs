@@ -15,10 +15,10 @@ fn test_family() {
     let mut family = FamilyView::new();
 
     // Test parents and children
-    family.set_parent1(ResourceReference::new(Uri::new("#parent1"), "parent1"));
-    family.set_parent2(ResourceReference::new(Uri::new("#parent2"), "parent2"));
-    family.add_child(ResourceReference::new(Uri::new("#child1"), "child1"));
-    family.add_child(ResourceReference::new(Uri::new("#child2"), "child2"));
+    family.set_parent1(ResourceReference::new(Uri::create("#parent1"), "parent1"));
+    family.set_parent2(ResourceReference::new(Uri::create("#parent2"), "parent2"));
+    family.add_child(ResourceReference::new(Uri::create("#child1"), "child1"));
+    family.add_child(ResourceReference::new(Uri::create("#child2"), "child2"));
     assert_eq!("parent1", family.get_parent1().unwrap().get_resource_id());
     assert_eq!(
         "#parent1",

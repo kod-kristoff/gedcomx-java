@@ -45,9 +45,12 @@ impl ResourceReference {
     // pub fn ResourceReference() {
     // }
 
-    // pub fn ResourceReference(URI resource) {
-    //   this.resource = resource;
-    // }
+    pub fn from_uri(resource: Uri) -> Self {
+        Self {
+            resource,
+            resource_id: String::default(),
+        }
+    }
 
     // pub fn ResourceReference(java.net.URI resource) {
     //   this.resource = URI.create(resource.toString());
