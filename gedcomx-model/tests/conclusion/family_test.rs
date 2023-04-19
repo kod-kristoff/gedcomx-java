@@ -1,32 +1,50 @@
-package org.gedcomx.conclusion;
+use gedcomx_model::conclusion::FamilyView;
 
-import org.gedcomx.common.ResourceReference;
-import org.gedcomx.common.URI;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
+use gedcomx_model::common::ResourceReference;
+use gedcomx_model::common::Uri;
+// import org.junit.Test;
+// import static org.junit.Assert.*;
 
 /**
  * Class for testing the Family class.
  * User: Randy Wilson
  * Date: 15 May 2015
  */
-public class FamilyTest {
-
-  @Test
-  public void testFamily() {
-    FamilyView family = new FamilyView();
+#[test]
+fn test_family() {
+    let mut family = FamilyView::new();
 
     // Test parents and children
-    family.setParent1(new ResourceReference(new URI("#parent1"), "parent1"));
-    family.setParent2(new ResourceReference(new URI("#parent2"), "parent2"));
-    family.addChild(new ResourceReference(new URI("#child1"), "child1"));
-    family.addChild(new ResourceReference(new URI("#child2"), "child2"));
-    assertEquals("parent1", family.getParent1().getResourceId());
-    assertEquals("#parent1", family.getParent1().getResource().toString());
-    assertEquals("#parent2", family.getParent2().getResource().toString());
-    assertEquals(2, family.getChildren().size());
-    assertEquals("#child1", family.getChildren().get(0).getResource().toString());
-    assertEquals("#child2", family.getChildren().get(1).getResource().toString());
-  }
+    family.set_parent1(ResourceReference::new(Uri::new("#parent1"), "parent1"));
+    family.set_parent2(ResourceReference::new(Uri::new("#parent2"), "parent2"));
+    family.add_child(ResourceReference::new(Uri::new("#child1"), "child1"));
+    family.add_child(ResourceReference::new(Uri::new("#child2"), "child2"));
+    assert_eq!("parent1", family.get_parent1().unwrap().get_resource_id());
+    assert_eq!(
+        "#parent1",
+        family.get_parent1().unwrap().get_resource().as_str()
+    );
+    assert_eq!(
+        "#parent2",
+        family.get_parent2().unwrap().get_resource().as_str()
+    );
+    assert_eq!(2, family.get_children().len());
+    assert_eq!(
+        "#child1",
+        family
+            .get_children()
+            .get(0)
+            .unwrap()
+            .get_resource()
+            .as_str()
+    );
+    assert_eq!(
+        "#child2",
+        family
+            .get_children()
+            .get(1)
+            .unwrap()
+            .get_resource()
+            .as_str()
+    );
 }

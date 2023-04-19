@@ -13,62 +13,69 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.gedcomx.common;
+// package org.gedcomx.common;
 
+// import com.fasterxml.jackson.annotation.JsonInclude;
+// import com.fasterxml.jackson.annotation.JsonValue;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+// import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A wrapper object for a URI.
  *
  * @author Ryan Heaton
  */
-@XmlJavaTypeAdapter(URIAdapter.class)
-@JsonInclude ( JsonInclude.Include.NON_NULL )
-public final class URI {
+// @XmlJavaTypeAdapter(URIAdapter.class)
+// @JsonInclude ( JsonInclude.Include.NON_NULL )
+pub struct Uri {
+    value: String,
+}
 
-  private final String value;
+impl Uri {
+    // pub fn URI(java.net.URI value) {
+    //   this(value == null ? null : value.toString());
+    // }
 
-  public URI(java.net.URI value) {
-    this(value == null ? null : value.toString());
-  }
+    pub fn new<S: Into<String>>(value: S) -> Self {
+        Self::create(value.into())
+    }
+    // pub fn URI(String value) {
+    //   if (value == null) {
+    //     throw new IllegalArgumentException("value cannot be null");
+    //   }
 
-  public URI(String value) {
-    if (value == null) {
-      throw new IllegalArgumentException("value cannot be null");
+    //   this.value = value;
+    // }
+
+    pub fn create(uri: String) -> Self {
+        Self { value: uri }
     }
 
-    this.value = value;
-  }
+    // pub fn static URI create(java.net.URI uri) {
+    //   return new URI(uri);
+    // }
 
-  public static URI create(String uri) {
-    return new URI(uri);
-  }
+    // pub fn java.net.URI toURI() {
+    //   return java.net.URI.create(this.value);
+    // }
 
-  public static URI create(java.net.URI uri) {
-    return new URI(uri);
-  }
+    // @Override
+    // @JsonValue
+    // pub fn String toString() {
+    //   return this.value;
+    // }
 
-  public java.net.URI toURI() {
-    return java.net.URI.create(this.value);
-  }
+    // @Override
+    // pub fn boolean equals(Object o) {
+    //   return this == o || !(o == null || getClass() != o.getClass()) && value.equals(((URI) o).value);
+    // }
 
-  @Override
-  @JsonValue
-  public String toString() {
-    return this.value;
-  }
+    // @Override
+    // pub fn int hashCode() {
+    //   return value.hashCode();
+    // }
 
-  @Override
-  public boolean equals(Object o) {
-    return this == o || !(o == null || getClass() != o.getClass()) && value.equals(((URI) o).value);
-  }
-
-  @Override
-  public int hashCode() {
-    return value.hashCode();
-  }
+    pub fn as_str(&self) -> &str {
+        self.value.as_str()
+    }
 }
